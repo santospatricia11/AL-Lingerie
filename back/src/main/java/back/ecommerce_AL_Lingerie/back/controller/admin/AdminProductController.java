@@ -1,20 +1,19 @@
-package back.ecommerce_AL_Lingerie.back.controller.admin;
+package com.aryan.ecom.controller.admin;
 
+import java.util.List;
 
-
-import back.ecommerce_AL_Lingerie.back.dto.FAQDto;
-import back.ecommerce_AL_Lingerie.back.dto.ProductDto;
-import back.ecommerce_AL_Lingerie.back.service.adminproduct.AdminProductService;
-import back.ecommerce_AL_Lingerie.back.service.faq.FAQService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.aryan.ecom.dto.FAQDto;
+import com.aryan.ecom.dto.ProductDto;
+import com.aryan.ecom.services.admin.adminproduct.AdminProductService;
+import com.aryan.ecom.services.admin.faq.FAQService;
 
+import io.jsonwebtoken.io.IOException;
 import lombok.RequiredArgsConstructor;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/admin")
@@ -83,7 +82,7 @@ public class AdminProductController {
 		}
 	}
 
-	/*@PutMapping("/product/{productId}")
+	@PutMapping("/product/{productId}")
 	public ResponseEntity<ProductDto> updateProduct(@PathVariable Long productId, @ModelAttribute ProductDto productDto) throws IOException {
 		log.info("Received request to update product with ID: {}", productId);
 		ProductDto updatedProduct = adminProductService.updateProduct(productId, productDto);
@@ -94,5 +93,5 @@ public class AdminProductController {
 			log.warn("Product with ID: {} not found for update", productId);
 			return ResponseEntity.notFound().build();
 		}
-	}*/
+	}
 }

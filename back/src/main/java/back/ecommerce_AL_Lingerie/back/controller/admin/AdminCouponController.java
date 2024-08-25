@@ -1,10 +1,7 @@
-package back.ecommerce_AL_Lingerie.back.controller.admin;
+package com.aryan.ecom.controller.admin;
 
 import java.util.List;
 
-import back.ecommerce_AL_Lingerie.back.exceptions.ValidationException;
-import back.ecommerce_AL_Lingerie.back.model.Coupon;
-import back.ecommerce_AL_Lingerie.back.service.coupon.AdminCouponService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.aryan.ecom.exceptions.ValidationException;
+import com.aryan.ecom.model.Coupon;
+import com.aryan.ecom.services.admin.coupon.AdminCouponService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -1,12 +1,10 @@
-package back.ecommerce_AL_Lingerie.back.controller.customer;
+package com.aryan.ecom.controller.customer;
 
 import java.io.IOException;
 
-import back.ecommerce_AL_Lingerie.back.dto.OrderedProductsResponseDto;
-import back.ecommerce_AL_Lingerie.back.dto.ReviewDto;
-import back.ecommerce_AL_Lingerie.back.service.customer.review.ReviewService;
 import lombok.extern.slf4j.Slf4j;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.aryan.ecom.dto.OrderedProductsResponseDto;
+import com.aryan.ecom.dto.ReviewDto;
+import com.aryan.ecom.services.customer.review.ReviewService;
 
 import lombok.RequiredArgsConstructor;
 

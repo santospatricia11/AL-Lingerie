@@ -1,9 +1,8 @@
-package back.ecommerce_AL_Lingerie.back.controller.customer;
+package com.aryan.ecom.controller.customer;
 
-
-import back.ecommerce_AL_Lingerie.back.dto.ProductDetailDto;
-import back.ecommerce_AL_Lingerie.back.dto.ProductDto;
-import back.ecommerce_AL_Lingerie.back.service.customer.CustomerProductService;
+import com.aryan.ecom.dto.ProductDetailDto;
+import com.aryan.ecom.dto.ProductDto;
+import com.aryan.ecom.services.customer.CustomerProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;

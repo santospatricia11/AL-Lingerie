@@ -1,12 +1,8 @@
-package back.ecommerce_AL_Lingerie.back.controller;
+package com.aryan.ecom.controller;
 
+import java.util.Optional;
 
-import back.ecommerce_AL_Lingerie.back.dto.AuthenticationRequest;
-import back.ecommerce_AL_Lingerie.back.dto.SignupRequest;
-import back.ecommerce_AL_Lingerie.back.dto.UserDto;
-import back.ecommerce_AL_Lingerie.back.model.User;
-import back.ecommerce_AL_Lingerie.back.repository.UserRepository;
-import back.ecommerce_AL_Lingerie.back.service.auth.AuthService;
+import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,18 +13,25 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.aryan.ecom.dto.AuthenticationRequest;
+import com.aryan.ecom.dto.SignupRequest;
+import com.aryan.ecom.dto.UserDto;
+import com.aryan.ecom.model.User;
+import com.aryan.ecom.repository.UserRepository;
+import com.aryan.ecom.services.auth.AuthService;
+import com.aryan.ecom.services.jwt.UserDetailsServiceImpl;
+import com.aryan.ecom.utils.JwtUtil;
+
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
-import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
 @Slf4j
 public class AuthController {
 
-	/*private final AuthenticationManager authenticationManager;
+	private final AuthenticationManager authenticationManager;
 	private final UserDetailsServiceImpl userDetailsService;
 	private final UserRepository userRepository;
 	private final JwtUtil jwtUtil;
@@ -82,5 +85,5 @@ public class AuthController {
 		UserDto userDto = authService.createUser(signupRequest);
 		log.info("User created with email: {}", signupRequest.getEmail());
 		return new ResponseEntity<>(userDto, HttpStatus.OK);
-	}*/
+	}
 }
