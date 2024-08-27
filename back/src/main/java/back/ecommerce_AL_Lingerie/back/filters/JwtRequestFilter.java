@@ -1,7 +1,9 @@
-package com.aryan.ecom.filters;
+package back.ecommerce_AL_Lingerie.back.filters;
 
 import java.io.IOException;
 
+import back.ecommerce_AL_Lingerie.back.services.jwt.UserDetailsServiceImpl;
+import back.ecommerce_AL_Lingerie.back.utils.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,8 +12,6 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.aryan.ecom.services.jwt.UserDetailsServiceImpl;
-import com.aryan.ecom.utils.JwtUtil;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

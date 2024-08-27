@@ -1,10 +1,12 @@
-package com.aryan.ecom.services.customer.review;
+package back.ecommerce_AL_Lingerie.back.services.customer.review;
+
+import back.ecommerce_AL_Lingerie.back.dto.OrderedProductsResponseDto;
+import back.ecommerce_AL_Lingerie.back.dto.ReviewDto;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
-import com.aryan.ecom.dto.OrderedProductsResponseDto;
-import com.aryan.ecom.dto.ReviewDto;
-
+@Service
 public interface ReviewService {
 	OrderedProductsResponseDto getOrderedProductsDetailsByOrderId(Long orderId);
 	

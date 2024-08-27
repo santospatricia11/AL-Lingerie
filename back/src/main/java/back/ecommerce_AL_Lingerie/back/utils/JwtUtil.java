@@ -1,4 +1,4 @@
-package com.aryan.ecom.utils;
+package back.ecommerce_AL_Lingerie.back.utils;
 
 import java.security.Key;
 import java.util.Date;

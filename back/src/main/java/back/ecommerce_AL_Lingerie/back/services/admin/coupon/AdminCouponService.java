@@ -1,10 +1,12 @@
-package com.aryan.ecom.services.admin.coupon;
+package back.ecommerce_AL_Lingerie.back.services.admin.coupon;
+
+
+import back.ecommerce_AL_Lingerie.back.model.Coupon;
 
 import java.util.List;
 
-import com.aryan.ecom.model.Coupon;
-
 public interface AdminCouponService {
+
 	Coupon createCoupon(Coupon coupon);
 	List<Coupon> getAllCoupon();
 }

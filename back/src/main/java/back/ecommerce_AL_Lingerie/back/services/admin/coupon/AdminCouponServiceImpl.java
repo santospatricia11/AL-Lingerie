@@ -1,13 +1,14 @@
-package com.aryan.ecom.services.admin.coupon;
+package back.ecommerce_AL_Lingerie.back.services.admin.coupon;
 
 import java.util.List;
 
+import back.ecommerce_AL_Lingerie.back.exceptions.ValidationException;
+import back.ecommerce_AL_Lingerie.back.model.Coupon;
+import back.ecommerce_AL_Lingerie.back.repository.CouponRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import com.aryan.ecom.exceptions.ValidationException;
-import com.aryan.ecom.model.Coupon;
-import com.aryan.ecom.repository.CouponRepository;
+
 
 import lombok.RequiredArgsConstructor;
 

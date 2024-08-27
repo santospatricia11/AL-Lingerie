@@ -9,12 +9,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.annotations.Type;
 
-@Entity
+
 @Data
 @AllArgsConstructor
 @Builder(toBuilder = true)
 @NoArgsConstructor
+@Entity
 @Table(name = "product")
 public class Product {
 
@@ -30,9 +32,7 @@ public class Product {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    @Lob
-    @Column(columnDefinition = "mediumblob")        // current limit : 16MB____use longblob for 4gb size (postgres)
-    private byte[] img;
+    private String imageUrl;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "category_id", nullable = false)
@@ -40,15 +40,13 @@ public class Product {
     @JsonIgnore
     private Category category;
 
-
-    //	TODO  : add mapstruct
     public ProductDto getDto() {
         return ProductDto.builder()
-                .id(this.id)  // Ensure the ID is being correctly assigned here
+                .id(this.id)
                 .name(this.name)
                 .price(this.price)
                 .description(this.description)
-                .byteImg(this.img)
+                .imageUrl(this.imageUrl)
                 .categoryId(this.category.getId())
                 .categoryName(this.category.getName())
                 .build();

@@ -1,8 +1,9 @@
-package com.aryan.ecom.services.admin.adminproduct;
+package back.ecommerce_AL_Lingerie.back.services.admin.adminproduct;
 
-import com.aryan.ecom.dto.ProductDto;
-import io.jsonwebtoken.io.IOException;
 
+import back.ecommerce_AL_Lingerie.back.dto.ProductDto;
+
+import java.io.IOException;
 import java.util.List;
 
 public interface AdminProductService {
@@ -17,5 +18,4 @@ public interface AdminProductService {
 
     ProductDto getProductById(Long productId);
 
-    ProductDto updateProduct(Long productId, ProductDto productDto) throws IOException;
 }

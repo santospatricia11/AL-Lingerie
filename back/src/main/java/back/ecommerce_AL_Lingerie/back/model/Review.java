@@ -25,30 +25,28 @@ public class Review {
     @Lob
     private String description;
 
-    @Lob
-    @Column(columnDefinition = "longblob")
-    private byte[] img;
+  /*  @Lob
+    @Column(name = "img", columnDefinition = "bytea")
+    private byte[] img;*/
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private Product product;
 
-
+    // Método para converter a entidade Review para ReviewDto
     public ReviewDto getDto() {
         return ReviewDto.builder()
-                .id(id)
-                .rating(rating)
-                .description(description)
-                .returnedImg(img)
-                .productId(product.getId())
-                .userId(user.getId())
-                .username(user.getName())
+                .id(this.id)
+                .rating(this.rating)
+                .description(this.description)
+                //.returnedImg(this.img)
+                .productId(this.product.getId())
+                .userId(this.user.getId())
+                .username(this.user.getName())
                 .build();
     }
 }

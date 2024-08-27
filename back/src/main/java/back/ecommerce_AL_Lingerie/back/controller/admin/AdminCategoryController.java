@@ -1,8 +1,9 @@
-package com.aryan.ecom.controller.admin;
+package back.ecommerce_AL_Lingerie.back.controller.admin;
 
-import com.aryan.ecom.dto.CategoryDto;
-import com.aryan.ecom.model.Category;
-import com.aryan.ecom.services.admin.category.CategoryService;
+
+import back.ecommerce_AL_Lingerie.back.dto.CategoryDto;
+import back.ecommerce_AL_Lingerie.back.model.Category;
+import back.ecommerce_AL_Lingerie.back.services.admin.category.CategoryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/admin")

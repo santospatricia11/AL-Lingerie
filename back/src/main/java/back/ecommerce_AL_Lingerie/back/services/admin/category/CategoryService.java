@@ -1,9 +1,10 @@
-package com.aryan.ecom.services.admin.category;
+package back.ecommerce_AL_Lingerie.back.services.admin.category;
+
+
+import back.ecommerce_AL_Lingerie.back.dto.CategoryDto;
+import back.ecommerce_AL_Lingerie.back.model.Category;
 
 import java.util.List;
-
-import com.aryan.ecom.dto.CategoryDto;
-import com.aryan.ecom.model.Category;
 
 public interface CategoryService {
 	 Category createCategory(CategoryDto categoryDto);

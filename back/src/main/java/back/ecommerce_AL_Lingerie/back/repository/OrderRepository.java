@@ -1,9 +1,8 @@
 package back.ecommerce_AL_Lingerie.back.repository;
 
 import back.ecommerce_AL_Lingerie.back.enums.OrderStatus;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Repository;
-
+import back.ecommerce_AL_Lingerie.back.model.Order;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;

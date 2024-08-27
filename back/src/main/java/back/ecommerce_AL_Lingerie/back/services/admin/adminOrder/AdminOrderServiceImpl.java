@@ -1,12 +1,14 @@
-package com.aryan.ecom.services.admin.adminOrder;
+package back.ecommerce_AL_Lingerie.back.services.admin.adminOrder;
 
-import com.aryan.ecom.dto.AnalyticsResponse;
-import com.aryan.ecom.dto.OrderDto;
-import com.aryan.ecom.enums.OrderStatus;
-import com.aryan.ecom.model.Order;
-import com.aryan.ecom.repository.OrderRepository;
+
+import back.ecommerce_AL_Lingerie.back.dto.AnalyticsResponse;
+import back.ecommerce_AL_Lingerie.back.dto.OrderDto;
+import back.ecommerce_AL_Lingerie.back.enums.OrderStatus;
+import back.ecommerce_AL_Lingerie.back.model.Order;
+import back.ecommerce_AL_Lingerie.back.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -17,10 +19,13 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Slf4j
 public class AdminOrderServiceImpl implements AdminOrderService {
+
+
+    @Autowired
     private final OrderRepository orderRepository;
 
     public List<OrderDto> getAllPlacedOrders() {
-        List<Order> orderList = orderRepository.findAllByOrderStatusIn(List.of(OrderStatus.Placed, OrderStatus.Shipped, OrderStatus.Delivered));
+        List<Order> orderList = orderRepository.findAllByOrderStatusIn(List.of(OrderStatus.PENDING, OrderStatus.SHIPPED, OrderStatus.DELIVERED));
         return orderList.stream().map(Order::getOrderDto).collect(Collectors.toList());
     }
 
@@ -30,9 +35,9 @@ public class AdminOrderServiceImpl implements AdminOrderService {
             Order order = optionalOrder.get();
 
             if (Objects.equals(status, "Shipped")) {
-                order.setOrderStatus(OrderStatus.Shipped);
+                order.setOrderStatus(OrderStatus.SHIPPED);
             } else if (Objects.equals(status, "Delivered")) {
-                order.setOrderStatus(OrderStatus.Delivered);
+                order.setOrderStatus(OrderStatus.DELIVERED);
             }
             return orderRepository.save(order).getOrderDto();
         }
@@ -49,9 +54,9 @@ public class AdminOrderServiceImpl implements AdminOrderService {
         Long currentMonthEarning = getTotalEarningsForMonth(currentDate.getMonthValue(), currentDate.getYear());
         Long previousMonthEarning = getTotalEarningsForMonth(previousMonthDate.getMonthValue(), previousMonthDate.getYear());
 
-        Long placed = orderRepository.countByOrderStatus(OrderStatus.Placed);
-        Long shipped = orderRepository.countByOrderStatus(OrderStatus.Shipped);
-        Long delivered = orderRepository.countByOrderStatus(OrderStatus.Delivered);
+        Long placed = orderRepository.countByOrderStatus(OrderStatus.PENDING);
+        Long shipped = orderRepository.countByOrderStatus(OrderStatus.SHIPPED);
+        Long delivered = orderRepository.countByOrderStatus(OrderStatus.DELIVERED);
 
         return new AnalyticsResponse(placed, shipped, delivered, currentMonthOrders, previousMonthOrders, currentMonthEarning, previousMonthEarning);
 
@@ -76,7 +81,7 @@ public class AdminOrderServiceImpl implements AdminOrderService {
         calendar.set(Calendar.SECOND, 59);
         Date endOfMonth = calendar.getTime();
 
-        List<Order> orders = orderRepository.findByDateBetweenAndOrderStatus(startOfMonth, endOfMonth, OrderStatus.Delivered);
+        List<Order> orders = orderRepository.findByDateBetweenAndOrderStatus(startOfMonth, endOfMonth, OrderStatus.DELIVERED);
         return (long) orders.size();
 
     }
@@ -99,7 +104,7 @@ public class AdminOrderServiceImpl implements AdminOrderService {
         calendar.set(Calendar.SECOND, 59);
         Date endOfMonth = calendar.getTime();
 
-        List<Order> orders = orderRepository.findByDateBetweenAndOrderStatus(startOfMonth, endOfMonth, OrderStatus.Delivered);
+        List<Order> orders = orderRepository.findByDateBetweenAndOrderStatus(startOfMonth, endOfMonth, OrderStatus.DELIVERED);
 
         Long sum = 0L;
         for (Order order : orders) {

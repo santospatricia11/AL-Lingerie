@@ -1,19 +1,18 @@
-package com.aryan.ecom.services.auth;
+package back.ecommerce_AL_Lingerie.back.services.auth;
 
+import back.ecommerce_AL_Lingerie.back.dto.SignupRequest;
+import back.ecommerce_AL_Lingerie.back.dto.UserDto;
+import back.ecommerce_AL_Lingerie.back.enums.OrderStatus;
+import back.ecommerce_AL_Lingerie.back.enums.UserRole;
+import back.ecommerce_AL_Lingerie.back.model.Order;
+import back.ecommerce_AL_Lingerie.back.model.User;
+import back.ecommerce_AL_Lingerie.back.repository.OrderRepository;
+import back.ecommerce_AL_Lingerie.back.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.aryan.ecom.dto.SignupRequest;
-import com.aryan.ecom.dto.UserDto;
-import com.aryan.ecom.enums.OrderStatus;
-import com.aryan.ecom.enums.UserRole;
-import com.aryan.ecom.model.Order;
-import com.aryan.ecom.model.User;
-import com.aryan.ecom.repository.OrderRepository;
-import com.aryan.ecom.repository.UserRepository;
 
 import jakarta.annotation.PostConstruct;
 
@@ -24,13 +23,8 @@ import java.util.Optional;
 @AllArgsConstructor
 public class AuthServiceImpl implements AuthService {
 
-    @Autowired
     private final UserRepository userRepository;
-
-    @Autowired
     private final BCryptPasswordEncoder bEncoder;
-
-    @Autowired
     private final OrderRepository orderRepository;
 
     public UserDto createUser(SignupRequest signupRequest) {
@@ -48,14 +42,13 @@ public class AuthServiceImpl implements AuthService {
         order.setTotalAmount(0L);
         order.setDiscount(0L);
         order.setUser(createdUser);
-        order.setOrderStatus(OrderStatus.Pending);
+        order.setOrderStatus(OrderStatus.PENDING);
         orderRepository.save(order);
 
         UserDto userDto = new UserDto();
         userDto.setId(createdUser.getId());
 
         return userDto;
-
     }
 
     public Boolean hasUserWithEmail(String email) {

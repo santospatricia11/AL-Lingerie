@@ -1,12 +1,12 @@
-package com.aryan.ecom.controller.customer;
+package back.ecommerce_AL_Lingerie.back.controller.customer;
 
-import com.aryan.ecom.dto.ProductDetailDto;
-import com.aryan.ecom.dto.ProductDto;
-import com.aryan.ecom.services.customer.CustomerProductService;
+
+import back.ecommerce_AL_Lingerie.back.dto.ProductDetailDto;
+import back.ecommerce_AL_Lingerie.back.dto.ProductDto;
+import back.ecommerce_AL_Lingerie.back.services.customer.CustomerProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/customer")

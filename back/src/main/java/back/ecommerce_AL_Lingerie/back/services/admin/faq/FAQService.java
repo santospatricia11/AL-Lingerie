@@ -1,6 +1,7 @@
-package com.aryan.ecom.services.admin.faq;
+package back.ecommerce_AL_Lingerie.back.services.admin.faq;
 
-import com.aryan.ecom.dto.FAQDto;
+
+import back.ecommerce_AL_Lingerie.back.dto.FAQDto;
 
 public interface FAQService {
 	FAQDto postFAQ(Long productId, FAQDto faqDto);

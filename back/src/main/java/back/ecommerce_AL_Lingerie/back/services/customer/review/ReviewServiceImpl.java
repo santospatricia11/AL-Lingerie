@@ -1,15 +1,17 @@
-package com.aryan.ecom.services.customer.review;
+package back.ecommerce_AL_Lingerie.back.services.customer.review;
 
-import com.aryan.ecom.dto.OrderedProductsResponseDto;
-import com.aryan.ecom.dto.ProductDto;
-import com.aryan.ecom.dto.ReviewDto;
-import com.aryan.ecom.model.*;
-import com.aryan.ecom.repository.OrderRepository;
-import com.aryan.ecom.repository.ProductRepository;
-import com.aryan.ecom.repository.ReviewRepository;
-import com.aryan.ecom.repository.UserRepository;
+
+import back.ecommerce_AL_Lingerie.back.dto.OrderedProductsResponseDto;
+import back.ecommerce_AL_Lingerie.back.dto.ProductDto;
+import back.ecommerce_AL_Lingerie.back.dto.ReviewDto;
+import back.ecommerce_AL_Lingerie.back.model.*;
+import back.ecommerce_AL_Lingerie.back.repository.OrderRepository;
+import back.ecommerce_AL_Lingerie.back.repository.ProductRepository;
+import back.ecommerce_AL_Lingerie.back.repository.ReviewRepository;
+import back.ecommerce_AL_Lingerie.back.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -21,6 +23,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Slf4j
 public class ReviewServiceImpl implements ReviewService {
+
+    @Autowired
     private final OrderRepository orderRepository;
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
@@ -39,7 +43,7 @@ public class ReviewServiceImpl implements ReviewService {
                         .name(cartItems.getProduct().getName())
                         .price(cartItems.getPrice())
                         .quantity(cartItems.getQuantity())
-                        .byteImg(cartItems.getProduct().getImg())
+                       // .byteImg(cartItems.getProduct().getImg())
                         .build();
 
                 productDtoList.add(productDto);
@@ -63,10 +67,10 @@ public class ReviewServiceImpl implements ReviewService {
             review.setUser(optionalUser.get());
             review.setProduct(optionalProduct.get());
             log.info("Review details set for user ID: {} and product ID: {}", reviewDto.getUserId(), reviewDto.getProductId());
-
+/*
             if (reviewDto.getImg() != null) {
                 review.setImg(reviewDto.getImg().getBytes());
-            }
+            }*/
 
             return reviewRepository.save(review).getDto();
         }

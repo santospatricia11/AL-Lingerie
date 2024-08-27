@@ -1,10 +1,12 @@
-package com.aryan.ecom.services.customer;
+package back.ecommerce_AL_Lingerie.back.services.customer;
+
+
+import back.ecommerce_AL_Lingerie.back.dto.ProductDetailDto;
+import back.ecommerce_AL_Lingerie.back.dto.ProductDto;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
-import com.aryan.ecom.dto.ProductDetailDto;
-import com.aryan.ecom.dto.ProductDto;
-
+@Service
 public interface CustomerProductService {
 	List<ProductDto> getAllProducts();
 

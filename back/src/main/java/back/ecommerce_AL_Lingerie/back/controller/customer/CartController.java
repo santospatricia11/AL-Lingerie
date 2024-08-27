@@ -1,7 +1,12 @@
-package com.aryan.ecom.controller.customer;
+package back.ecommerce_AL_Lingerie.back.controller.customer;
 
-import java.util.List;
 
+
+import back.ecommerce_AL_Lingerie.back.dto.AddProductInCartDto;
+import back.ecommerce_AL_Lingerie.back.dto.OrderDto;
+import back.ecommerce_AL_Lingerie.back.dto.PlaceOrderDto;
+import back.ecommerce_AL_Lingerie.back.exceptions.ValidationException;
+import back.ecommerce_AL_Lingerie.back.services.customer.cart.CartService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 
@@ -13,13 +18,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.aryan.ecom.dto.AddProductInCartDto;
-import com.aryan.ecom.dto.OrderDto;
-import com.aryan.ecom.dto.PlaceOrderDto;
-import com.aryan.ecom.exceptions.ValidationException;
-import com.aryan.ecom.services.customer.cart.CartService;
+
 
 import lombok.RequiredArgsConstructor;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/customer")

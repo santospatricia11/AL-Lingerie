@@ -1,10 +1,10 @@
-package com.aryan.ecom.controller.customer;
+package back.ecommerce_AL_Lingerie.back.controller.customer;
 
-import java.util.List;
 
+import back.ecommerce_AL_Lingerie.back.dto.WishlistDto;
+import back.ecommerce_AL_Lingerie.back.services.customer.wishlist.WishlistService;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,20 +14,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.aryan.ecom.dto.WishlistDto;
-import com.aryan.ecom.services.customer.wishlist.WishlistService;
+
 
 import lombok.RequiredArgsConstructor;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/customer")
 @Slf4j
 public class WishlistController {
+
 	private final WishlistService wishlistService;
 
 	@PostMapping("/wishlist")
 	public ResponseEntity<?> addProductToWishlist(@RequestBody WishlistDto wishlistDto) {
+
 		log.info("Received request to add product to wishlist for user with ID: {}", wishlistDto.getUserId());
 		WishlistDto postedWishlistDto = wishlistService.addProductToWishlist(wishlistDto);
 		if (postedWishlistDto == null) {

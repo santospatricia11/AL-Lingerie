@@ -1,9 +1,12 @@
-package com.aryan.ecom.services.admin.adminOrder;
+package back.ecommerce_AL_Lingerie.back.services.admin.adminOrder;
 
-import com.aryan.ecom.dto.AnalyticsResponse;
-import com.aryan.ecom.dto.OrderDto;
+
+
+import back.ecommerce_AL_Lingerie.back.dto.AnalyticsResponse;
+import back.ecommerce_AL_Lingerie.back.dto.OrderDto;
 
 import java.util.List;
+
 
 public interface AdminOrderService {
     List<OrderDto> getAllPlacedOrders();

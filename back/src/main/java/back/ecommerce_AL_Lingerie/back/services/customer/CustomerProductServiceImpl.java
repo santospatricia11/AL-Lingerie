@@ -1,19 +1,21 @@
-package com.aryan.ecom.services.customer;
+package back.ecommerce_AL_Lingerie.back.services.customer;
+
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import back.ecommerce_AL_Lingerie.back.dto.ProductDetailDto;
+import back.ecommerce_AL_Lingerie.back.dto.ProductDto;
+import back.ecommerce_AL_Lingerie.back.model.FAQ;
+import back.ecommerce_AL_Lingerie.back.model.Product;
+import back.ecommerce_AL_Lingerie.back.model.Review;
+import back.ecommerce_AL_Lingerie.back.repository.FAQRepository;
+import back.ecommerce_AL_Lingerie.back.repository.ProductRepository;
+import back.ecommerce_AL_Lingerie.back.repository.ReviewRepository;
 import org.springframework.stereotype.Service;
 
-import com.aryan.ecom.dto.ProductDetailDto;
-import com.aryan.ecom.dto.ProductDto;
-import com.aryan.ecom.model.FAQ;
-import com.aryan.ecom.model.Product;
-import com.aryan.ecom.model.Review;
-import com.aryan.ecom.repository.FAQRepository;
-import com.aryan.ecom.repository.ProductRepository;
-import com.aryan.ecom.repository.ReviewRepository;
+
 
 import lombok.RequiredArgsConstructor;
 

@@ -1,14 +1,15 @@
-package com.aryan.ecom.controller.admin;
+package back.ecommerce_AL_Lingerie.back.controller.admin;
 
 import java.util.List;
 
+import back.ecommerce_AL_Lingerie.back.dto.AnalyticsResponse;
+import back.ecommerce_AL_Lingerie.back.dto.OrderDto;
+import back.ecommerce_AL_Lingerie.back.services.admin.adminOrder.AdminOrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.aryan.ecom.dto.AnalyticsResponse;
-import com.aryan.ecom.dto.OrderDto;
-import com.aryan.ecom.services.admin.adminOrder.AdminOrderService;
+
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,6 +23,7 @@ public class AdminOrderController {
 
 	@GetMapping("/placedOrders")
 	public ResponseEntity<List<OrderDto>> getAllPlacedOrders() {
+
 		log.info("Received request to get all placed orders");
 		List<OrderDto> orders = adminOrderService.getAllPlacedOrders();
 		log.info("Returning {} placed orders", orders.size());
@@ -30,6 +32,7 @@ public class AdminOrderController {
 
 	@PutMapping("/order/{orderId}/{status}")
 	public ResponseEntity<?> changeOrderStatus(@PathVariable Long orderId, @PathVariable String status) {
+
 		log.info("Received request to change order status for orderId: {} to status: {}", orderId, status);
 		OrderDto orderDto = adminOrderService.changeOrderStatus(orderId, status);
 		if (orderDto == null) {
@@ -42,6 +45,7 @@ public class AdminOrderController {
 
 	@GetMapping("/order/analytics")
 	public ResponseEntity<AnalyticsResponse> getAnalytics() {
+
 		log.info("Received request to get order analytics");
 		AnalyticsResponse analytics = adminOrderService.calculateAnalytics();
 		log.info("Returning analytics response");

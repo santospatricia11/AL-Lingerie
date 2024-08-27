@@ -26,16 +26,14 @@ public class FAQ {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "product_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private Product product;
 
     public FAQDto getFAQDto() {
-        return  FAQDto.builder()
+        return FAQDto.builder()
                 .id(id)
                 .question(question)
                 .answer(answer)
                 .productId(product.getId())
                 .build();
-
     }
 }

@@ -1,18 +1,18 @@
-package com.aryan.ecom.services.jwt;
+package back.ecommerce_AL_Lingerie.back.services.jwt;
 
 import java.util.ArrayList;
 import java.util.Optional;
 
+import back.ecommerce_AL_Lingerie.back.model.User;
+import back.ecommerce_AL_Lingerie.back.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.aryan.ecom.model.User;
-import com.aryan.ecom.repository.UserRepository;
+
 
 @Service
 @AllArgsConstructor

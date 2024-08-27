@@ -1,19 +1,21 @@
-package com.aryan.ecom.services.customer.wishlist;
+package back.ecommerce_AL_Lingerie.back.services.customer.wishlist;
+
 
 import java.util.List;
+
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import back.ecommerce_AL_Lingerie.back.dto.WishlistDto;
+import back.ecommerce_AL_Lingerie.back.model.Product;
+import back.ecommerce_AL_Lingerie.back.model.User;
+import back.ecommerce_AL_Lingerie.back.model.Wishlist;
+import back.ecommerce_AL_Lingerie.back.repository.ProductRepository;
+import back.ecommerce_AL_Lingerie.back.repository.UserRepository;
+import back.ecommerce_AL_Lingerie.back.repository.WishlistRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import com.aryan.ecom.dto.WishlistDto;
-import com.aryan.ecom.model.Product;
-import com.aryan.ecom.model.User;
-import com.aryan.ecom.model.Wishlist;
-import com.aryan.ecom.repository.ProductRepository;
-import com.aryan.ecom.repository.UserRepository;
-import com.aryan.ecom.repository.WishlistRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -21,11 +23,14 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Slf4j
 public class WishlistServiceImpl implements WishlistService{
+
+
 	private final UserRepository userRepository;
 	private final ProductRepository productRepository;
 	private final WishlistRepository wishlistRepository;
 
 	public WishlistDto addProductToWishlist(WishlistDto wishlistDto) {
+
 		Optional<Product> optionalProduct = productRepository.findById(wishlistDto.getProductId());
 		Optional<User> optionalUser = userRepository.findById(wishlistDto.getUserId());
 
@@ -42,6 +47,7 @@ public class WishlistServiceImpl implements WishlistService{
 	}
 
 	public List<WishlistDto> getWishlistByUserId(Long userId){
+
 		List<Wishlist> wishlist = wishlistRepository.findAllByUserId(userId);
 		log.info("Retrieved wishlist for user with ID {}", userId);
 		return wishlist.stream().map(Wishlist::getWishlistDto).collect(Collectors.toList());

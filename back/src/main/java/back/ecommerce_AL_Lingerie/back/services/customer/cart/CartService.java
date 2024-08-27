@@ -1,15 +1,18 @@
-package com.aryan.ecom.services.customer.cart;
+package back.ecommerce_AL_Lingerie.back.services.customer.cart;
+
+
+import back.ecommerce_AL_Lingerie.back.dto.AddProductInCartDto;
+import back.ecommerce_AL_Lingerie.back.dto.OrderDto;
+import back.ecommerce_AL_Lingerie.back.dto.PlaceOrderDto;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.http.ResponseEntity;
-
-import com.aryan.ecom.dto.AddProductInCartDto;
-import com.aryan.ecom.dto.OrderDto;
-import com.aryan.ecom.dto.PlaceOrderDto;
-
+@Service
 public interface CartService {
+	
 	ResponseEntity<?> addProductToCart(AddProductInCartDto addProductInCartDto);
 
 	OrderDto getCartByUserId(Long userId);

@@ -26,12 +26,10 @@ public class CartItems {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "product_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private Product product;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
     @OneToOne(fetch = FetchType.LAZY)
@@ -46,7 +44,7 @@ public class CartItems {
                 .quantity(quantity)
                 .userId(user.getId())
                 .productName(product.getName())
-                .returnedImage(product.getImg())
+              //  .returnedImage(product.getImg())
                 .build();
     }
 }

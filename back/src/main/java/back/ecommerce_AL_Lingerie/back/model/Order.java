@@ -12,11 +12,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-@Entity
+
 @Data
 @AllArgsConstructor
 @Builder
 @NoArgsConstructor
+@Entity
 @Table(name = "orders")
 public class Order {
 
@@ -35,6 +36,8 @@ public class Order {
 
     private String payment;
 
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "order_status", length = 25)
     private OrderStatus orderStatus;
 
     private Long totalAmount;
@@ -43,137 +46,32 @@ public class Order {
 
     private UUID trackingId;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "coupon_id", referencedColumnName = "id")
     private Coupon coupon;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "order", cascade = CascadeType.ALL)
     private List<CartItems> cartItems;
 
+    // Método para converter a entidade Order para OrderDto
     public OrderDto getOrderDto() {
-
         return OrderDto.builder()
-                .id(id)
-                .orderDescription(orderDescription)
-                .date(date)
-                .amount(amount)
-                .address(address)
-                .totalAmount(totalAmount)
-                .discount(discount)
-                .payment(payment)
-                .orderStatus(orderStatus)
-                .trackingId(trackingId)
-                .userName(user != null ? user.getName() : null)
-                .couponName(coupon != null ? coupon.getName() : null)
+                .id(this.id)
+                .orderDescription(this.orderDescription)
+                .date(this.date)
+                .amount(this.amount)
+                .address(this.address)
+                .totalAmount(this.totalAmount)
+                .discount(this.discount)
+                .payment(this.payment)
+                .orderStatus(this.orderStatus)
+                .trackingId(this.trackingId)
+                .userName(this.user != null ? this.user.getName() : null)
+                .couponName(this.coupon != null ? this.coupon.getName() : null)
                 .build();
-
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getOrderDescription() {
-        return orderDescription;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public Long getAmount() {
-        return amount;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public String getPayment() {
-        return payment;
-    }
-
-    public OrderStatus getOrderStatus() {
-        return orderStatus;
-    }
-
-    public Long getTotalAmount() {
-        return totalAmount;
-    }
-
-    public Long getDiscount() {
-        return discount;
-    }
-
-    public UUID getTrackingId() {
-        return trackingId;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public Coupon getCoupon() {
-        return coupon;
-    }
-
-    public List<CartItems> getCartItems() {
-        return cartItems;
-    }
-
-    public void setOrderDescription(String orderDescription) {
-        this.orderDescription = orderDescription;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public void setAmount(Long amount) {
-        this.amount = amount;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public void setPayment(String payment) {
-        this.payment = payment;
-    }
-
-    public void setOrderStatus(OrderStatus orderStatus) {
-        this.orderStatus = orderStatus;
-    }
-
-    public void setTotalAmount(Long totalAmount) {
-        this.totalAmount = totalAmount;
-    }
-
-    public void setDiscount(Long discount) {
-        this.discount = discount;
-    }
-
-    public void setTrackingId(UUID trackingId) {
-        this.trackingId = trackingId;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public void setCoupon(Coupon coupon) {
-        this.coupon = coupon;
-    }
-
-    public void setCartItems(List<CartItems> cartItems) {
-        this.cartItems = cartItems;
     }
 }

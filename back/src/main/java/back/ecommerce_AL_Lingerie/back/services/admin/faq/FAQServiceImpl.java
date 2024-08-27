@@ -1,14 +1,14 @@
-package com.aryan.ecom.services.admin.faq;
+package back.ecommerce_AL_Lingerie.back.services.admin.faq;
 
 import java.util.Optional;
 
+import back.ecommerce_AL_Lingerie.back.dto.FAQDto;
+import back.ecommerce_AL_Lingerie.back.model.FAQ;
+import back.ecommerce_AL_Lingerie.back.model.Product;
+import back.ecommerce_AL_Lingerie.back.repository.FAQRepository;
+import back.ecommerce_AL_Lingerie.back.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
-import com.aryan.ecom.dto.FAQDto;
-import com.aryan.ecom.model.FAQ;
-import com.aryan.ecom.model.Product;
-import com.aryan.ecom.repository.FAQRepository;
-import com.aryan.ecom.repository.ProductRepository;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

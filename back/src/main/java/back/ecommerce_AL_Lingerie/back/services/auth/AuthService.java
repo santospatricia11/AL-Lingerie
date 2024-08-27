@@ -1,7 +1,8 @@
-package com.aryan.ecom.services.auth;
+package back.ecommerce_AL_Lingerie.back.services.auth;
 
-import com.aryan.ecom.dto.SignupRequest;
-import com.aryan.ecom.dto.UserDto;
+
+import back.ecommerce_AL_Lingerie.back.dto.SignupRequest;
+import back.ecommerce_AL_Lingerie.back.dto.UserDto;
 
 public interface AuthService {
 	UserDto createUser(SignupRequest signupRequest);

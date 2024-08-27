@@ -12,6 +12,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 public class ProductDetailDto {
+
     private ProductDto productDto;
 
     private List<ReviewDto> reviewDtoList;

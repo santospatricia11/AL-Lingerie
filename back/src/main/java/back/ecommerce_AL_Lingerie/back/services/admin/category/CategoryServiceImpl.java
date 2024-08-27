@@ -1,15 +1,17 @@
-package com.aryan.ecom.services.admin.category;
+package back.ecommerce_AL_Lingerie.back.services.admin.category;
 
-import java.util.List;
 
+
+import back.ecommerce_AL_Lingerie.back.dto.CategoryDto;
+import back.ecommerce_AL_Lingerie.back.model.Category;
+import back.ecommerce_AL_Lingerie.back.repository.CategoryRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import com.aryan.ecom.dto.CategoryDto;
-import com.aryan.ecom.model.Category;
-import com.aryan.ecom.repository.CategoryRepository;
 
 import lombok.AllArgsConstructor;
+
+import java.util.List;
 
 @Service
 @AllArgsConstructor

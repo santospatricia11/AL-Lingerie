@@ -1,36 +1,29 @@
-package com.aryan.ecom.services.customer.cart;
+package back.ecommerce_AL_Lingerie.back.services.customer.cart;
 
 import java.util.Date;
 import java.util.List;
+
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import back.ecommerce_AL_Lingerie.back.dto.AddProductInCartDto;
+import back.ecommerce_AL_Lingerie.back.dto.CartItemsDto;
+import back.ecommerce_AL_Lingerie.back.dto.OrderDto;
+import back.ecommerce_AL_Lingerie.back.dto.PlaceOrderDto;
+import back.ecommerce_AL_Lingerie.back.enums.OrderStatus;
+import back.ecommerce_AL_Lingerie.back.exceptions.ValidationException;
+import back.ecommerce_AL_Lingerie.back.model.*;
+import back.ecommerce_AL_Lingerie.back.repository.*;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.aryan.ecom.dto.AddProductInCartDto;
-import com.aryan.ecom.dto.CartItemsDto;
-import com.aryan.ecom.dto.OrderDto;
-import com.aryan.ecom.dto.PlaceOrderDto;
-import com.aryan.ecom.enums.OrderStatus;
-import com.aryan.ecom.exceptions.ValidationException;
-import com.aryan.ecom.model.CartItems;
-import com.aryan.ecom.model.Coupon;
-import com.aryan.ecom.model.Order;
-import com.aryan.ecom.model.Product;
-import com.aryan.ecom.model.User;
-import com.aryan.ecom.repository.CartItemsRepository;
-import com.aryan.ecom.repository.CouponRepository;
-import com.aryan.ecom.repository.OrderRepository;
-import com.aryan.ecom.repository.ProductRepository;
-import com.aryan.ecom.repository.UserRepository;
+
+
 
 @Service
 @AllArgsConstructor
@@ -57,7 +50,7 @@ public class CartServiceImpl implements CartService {
 		System.out.println(addProductInCartDto.toString());
 
 		Order activeOrder = orderRepository.findByUserIdAndOrderStatus(addProductInCartDto.getUserId(),
-				OrderStatus.Pending);
+				OrderStatus.PENDING);
 
 		if (activeOrder == null) {
 			log.info("active order not found");
@@ -65,11 +58,11 @@ public class CartServiceImpl implements CartService {
 
 		}
 
-		// check if that same product is already present for that particular user
+
 		Optional<CartItems> optionalCartItems = cartItemsRepository.findByProductIdAndOrderIdAndUserId(
 				addProductInCartDto.getProductId(), activeOrder.getId(), addProductInCartDto.getUserId());
 
-		System.out.println(addProductInCartDto.getUserId() + " <=> " + OrderStatus.Pending);
+		System.out.println(addProductInCartDto.getUserId() + " <=> " + OrderStatus.PENDING);
 
 		if (optionalCartItems.isPresent()) {
 			return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
@@ -102,8 +95,8 @@ public class CartServiceImpl implements CartService {
 	}
 
 	public OrderDto getCartByUserId(Long userId) {
-		Order activeOrder = orderRepository.findByUserIdAndOrderStatus(userId, OrderStatus.Pending);
-		// if order is in other state than pending
+		Order activeOrder = orderRepository.findByUserIdAndOrderStatus(userId, OrderStatus.PENDING);
+
 		if (activeOrder == null)
 			return null;
 		List<CartItemsDto> cartItemsDtosList = activeOrder.getCartItems().stream().map(CartItems::getCartDto)
@@ -127,7 +120,7 @@ public class CartServiceImpl implements CartService {
 	}
 
 	public OrderDto applyCoupon(Long userId, String code) {
-		Order activeOrder = orderRepository.findByUserIdAndOrderStatus(userId, OrderStatus.Pending);
+		Order activeOrder = orderRepository.findByUserIdAndOrderStatus(userId, OrderStatus.PENDING);
 		Coupon coupon = couponRepository.findByCode(code)
 				.orElseThrow(() -> new ValidationException("coupon not found"));
 		if (couponIsExpired(coupon)) {
@@ -153,7 +146,7 @@ public class CartServiceImpl implements CartService {
 
 	public OrderDto increaseProductQuantity(AddProductInCartDto addProductInCartDto) {
 		Order activeOrder = orderRepository.findByUserIdAndOrderStatus(addProductInCartDto.getUserId(),
-				OrderStatus.Pending);
+				OrderStatus.PENDING);
 		Optional<Product> optionalProduct = productRepository.findById(addProductInCartDto.getProductId());
 		Optional<CartItems> optionalCartItem = cartItemsRepository.findByProductIdAndOrderIdAndUserId(
 				optionalProduct.get().getId(), activeOrder.getId(), addProductInCartDto.getUserId());
@@ -185,7 +178,7 @@ public class CartServiceImpl implements CartService {
 
 	public OrderDto decreaseProductQuantity(AddProductInCartDto addProductInCartDto) {
 		Order activeOrder = orderRepository.findByUserIdAndOrderStatus(addProductInCartDto.getUserId(),
-				OrderStatus.Pending);
+				OrderStatus.PENDING);
 		Optional<Product> optionalProduct = productRepository.findById(addProductInCartDto.getProductId());
 		Optional<CartItems> optionalCartItem = cartItemsRepository.findByProductIdAndOrderIdAndUserId(
 				optionalProduct.get().getId(), activeOrder.getId(), addProductInCartDto.getUserId());
@@ -218,7 +211,7 @@ public class CartServiceImpl implements CartService {
 	}
 
 	public OrderDto placedOrder(PlaceOrderDto placeOrderDto) {
-		Order activeOrder = orderRepository.findByUserIdAndOrderStatus(placeOrderDto.getUserId(), OrderStatus.Pending);
+		Order activeOrder = orderRepository.findByUserIdAndOrderStatus(placeOrderDto.getUserId(), OrderStatus.PENDING);
 
 		if (activeOrder == null) {
 			log.info("There is no active pending order for the user with userId: {}", placeOrderDto.getUserId());
@@ -232,7 +225,7 @@ public class CartServiceImpl implements CartService {
 			// Update the active order with the new details
 			activeOrder.setAddress(placeOrderDto.getAddress());
 			activeOrder.setDate(new Date());
-			activeOrder.setOrderStatus(OrderStatus.Placed);
+			activeOrder.setOrderStatus(OrderStatus.PENDING);
 			activeOrder.setTrackingId(UUID.randomUUID());
 
 			// Save the updated order
@@ -246,7 +239,7 @@ public class CartServiceImpl implements CartService {
 			newOrder.setTotalAmount(0L);
 			newOrder.setDiscount(0L);
 			newOrder.setUser(optionalUser.get());
-			newOrder.setOrderStatus(OrderStatus.Pending);
+			newOrder.setOrderStatus(OrderStatus.PENDING);
 
 			// Save the new pending order
 			orderRepository.save(newOrder);
@@ -261,7 +254,7 @@ public class CartServiceImpl implements CartService {
 	public List<OrderDto> getMyPlacedOrders(Long userId) {
 		return orderRepository
 				.findByUserIdAndOrderStatusIn(userId,
-						List.of(OrderStatus.Shipped, OrderStatus.Placed, OrderStatus.Delivered))
+						List.of(OrderStatus.SHIPPED, OrderStatus.PENDING, OrderStatus.DELIVERED))
 				.stream().map(Order::getOrderDto).collect(Collectors.toList());
 	}
 

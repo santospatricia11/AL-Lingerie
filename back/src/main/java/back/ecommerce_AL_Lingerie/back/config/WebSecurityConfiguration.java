@@ -1,5 +1,6 @@
-package com.aryan.ecom.config;
+package back.ecommerce_AL_Lingerie.back.config;
 
+import back.ecommerce_AL_Lingerie.back.filters.JwtRequestFilter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,9 +16,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
-
-import com.aryan.ecom.filters.JwtRequestFilter;
-
 import lombok.RequiredArgsConstructor;
 
 @Configuration

@@ -1,11 +1,12 @@
-package com.aryan.ecom.services.customer.wishlist;
+package back.ecommerce_AL_Lingerie.back.services.customer.wishlist;
+
+
+import back.ecommerce_AL_Lingerie.back.dto.WishlistDto;
 
 import java.util.List;
 
-import com.aryan.ecom.dto.WishlistDto;
-
 public interface WishlistService {
-	WishlistDto addProductToWishlist( WishlistDto wishlistDto);
+	WishlistDto addProductToWishlist(WishlistDto wishlistDto);
 	
 	List<WishlistDto> getWishlistByUserId(Long userId);
 }

@@ -1,4 +1,4 @@
-package com.aryan.ecom.config;
+package back.ecommerce_AL_Lingerie.back.config;
 
 import java.io.IOException;
 import java.util.HashMap;
