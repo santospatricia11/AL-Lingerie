@@ -44,7 +44,7 @@ public class CartItems {
                 .quantity(quantity)
                 .userId(user.getId())
                 .productName(product.getName())
-              //  .returnedImage(product.getImg())
+                .imageUrl(product.getImageUrl())
                 .build();
     }
 }

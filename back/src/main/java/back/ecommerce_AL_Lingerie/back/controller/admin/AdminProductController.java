@@ -47,6 +47,22 @@ public class AdminProductController {
 		}
 	}
 
+	@GetMapping("/products")
+	public ResponseEntity<List<ProductDto>> getAllProducts() {
+		System.out.println("cheguei AQUI");
+		try {
+			List<ProductDto> products = adminProductService.getAllProducts();
+			return ResponseEntity.ok(products);
+        } catch (Exception e) {
+			log.error("Error fetching products", e);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+
+		}
+
+	}
+
+
+
 	@DeleteMapping("/product/{id}")
 	public ResponseEntity<Void> deleteProduct(@PathVariable("id") Long id) {
 		boolean isDeleted = adminProductService.deleteProduct(id);

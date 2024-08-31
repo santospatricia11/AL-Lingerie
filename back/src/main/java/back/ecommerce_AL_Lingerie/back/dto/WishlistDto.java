@@ -21,7 +21,7 @@ public class WishlistDto {
 
     private String productDescription;
 
-    private byte[] returnedImg;
+    private String imageUrl;
 
     private Long price;
 }

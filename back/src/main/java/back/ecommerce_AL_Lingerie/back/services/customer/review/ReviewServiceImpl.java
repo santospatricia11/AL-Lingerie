@@ -67,10 +67,10 @@ public class ReviewServiceImpl implements ReviewService {
             review.setUser(optionalUser.get());
             review.setProduct(optionalProduct.get());
             log.info("Review details set for user ID: {} and product ID: {}", reviewDto.getUserId(), reviewDto.getProductId());
-/*
-            if (reviewDto.getImg() != null) {
-                review.setImg(reviewDto.getImg().getBytes());
-            }*/
+
+            if (reviewDto.getImageUrl()!= null) {
+                review.setImageUrl(reviewDto.getImageUrl().toLowerCase());
+            }
 
             return reviewRepository.save(review).getDto();
         }

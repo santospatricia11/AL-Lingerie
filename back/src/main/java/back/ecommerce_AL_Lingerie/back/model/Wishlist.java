@@ -34,7 +34,7 @@ private Long id;
         return WishlistDto.builder()
                 .id(id)
                 .productId(product.getId())
-                //.returnedImg(product.getImg())
+                .imageUrl(product.getImageUrl())
                 .productName(product.getName())
                 .productDescription(product.getDescription())
                 .price(product.getPrice())

@@ -7,6 +7,7 @@ import back.ecommerce_AL_Lingerie.back.services.customer.CustomerProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,9 +45,8 @@ public class CustomerProductController {
         ProductDetailDto productDetailDto = customerProductService.getProductDetailById(productId);
         if (productDetailDto == null) {
             log.warn("Product detail not found for product with ID: {}", productId);
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-
         return ResponseEntity.ok(productDetailDto);
     }
 }

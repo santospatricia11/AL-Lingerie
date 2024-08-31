@@ -17,7 +17,7 @@ public class ReviewDto {
     private Long rating;
 
     private String description;
-
+    private String imageUrl;
     private Long userId;
 
     private Long productId;

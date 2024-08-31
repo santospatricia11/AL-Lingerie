@@ -63,7 +63,7 @@ public class AdminOrderServiceImpl implements AdminOrderService {
     }
 
     public Long getTotalOrdersForMonths(int month, int year) {
-        // set time on first day of month
+
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.YEAR, year);
         calendar.set(Calendar.MONTH, month - 1);    // Indexing starts from 0 jan->0 to dec->11
@@ -74,7 +74,7 @@ public class AdminOrderServiceImpl implements AdminOrderService {
         calendar.set(Calendar.MILLISECOND, 0);
         Date startOfMonth = calendar.getTime();
 
-        // set time on last day of month
+
         calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
         calendar.set(Calendar.HOUR_OF_DAY, 23);
         calendar.set(Calendar.MINUTE, 59);
@@ -89,7 +89,7 @@ public class AdminOrderServiceImpl implements AdminOrderService {
     public Long getTotalEarningsForMonth(int month, int year) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.YEAR, year);
-        calendar.set(Calendar.MONTH, month - 1);    // Indexing starts from 0 jan->0 to dec->11
+        calendar.set(Calendar.MONTH, month - 1);
         calendar.set(Calendar.DAY_OF_MONTH, 1);
         calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);
@@ -97,7 +97,7 @@ public class AdminOrderServiceImpl implements AdminOrderService {
         calendar.set(Calendar.MILLISECOND, 0);
         Date startOfMonth = calendar.getTime();
 
-        // set time on last day of month
+
         calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
         calendar.set(Calendar.HOUR_OF_DAY, 23);
         calendar.set(Calendar.MINUTE, 59);

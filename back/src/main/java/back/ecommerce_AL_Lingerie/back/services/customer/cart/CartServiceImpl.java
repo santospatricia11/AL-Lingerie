@@ -222,18 +222,15 @@ public class CartServiceImpl implements CartService {
 		if (optionalUser.isPresent()) {
 			activeOrder.setOrderDescription(placeOrderDto.getOrderDescription());
 
-			// Update the active order with the new details
 			activeOrder.setAddress(placeOrderDto.getAddress());
 			activeOrder.setDate(new Date());
 			activeOrder.setOrderStatus(OrderStatus.PENDING);
 			activeOrder.setTrackingId(UUID.randomUUID());
 
-			// Save the updated order
 			orderRepository.save(activeOrder);
 			log.info("Updated order saved with ID: {}", activeOrder.getId());
 
 
-			// Create a new empty pending order for the user
 			Order newOrder = new Order();
 			newOrder.setAmount(0L);
 			newOrder.setTotalAmount(0L);
@@ -241,11 +238,9 @@ public class CartServiceImpl implements CartService {
 			newOrder.setUser(optionalUser.get());
 			newOrder.setOrderStatus(OrderStatus.PENDING);
 
-			// Save the new pending order
 			orderRepository.save(newOrder);
 			log.info("new pending order created : {}",newOrder.toString());
 
-			// Return the DTO of the active order
 			return activeOrder.getOrderDto();
 		}
 		return null;

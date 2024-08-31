@@ -6,6 +6,7 @@ import back.ecommerce_AL_Lingerie.back.model.Category;
 import back.ecommerce_AL_Lingerie.back.model.Product;
 import back.ecommerce_AL_Lingerie.back.repository.CategoryRepository;
 import back.ecommerce_AL_Lingerie.back.repository.ProductRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -25,6 +27,7 @@ public class AdminProductServiceImpl implements AdminProductService {
     private final CategoryRepository categoryRepository;
 
     @Override
+    @Transactional
     public ProductDto addProduct(ProductDto productDto) {
         Product product = Product.builder()
                 .name(productDto.getName())
@@ -42,9 +45,28 @@ public class AdminProductServiceImpl implements AdminProductService {
     @Override
     public List<ProductDto> getAllProducts() {
         log.info("Fetching all products.");
-        List<Product> products = productRepository.findAll();
-        return products.stream().map(Product::getDto).collect(Collectors.toList());
+        try {
+            List<Product> products = productRepository.findAll();
+            log.info("Number of products retrieved: {}", products.size());
+            List<ProductDto> productDtos = products.stream()
+                    .map(product -> {
+                        try {
+                            return product.getDto();
+                        } catch (Exception e) {
+                            log.error("Error converting product to DTO", e);
+                            return null; // Pode ser necessário lidar com produtos nulos posteriormente
+                        }
+                    })
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.toList());
+            log.info("Products converted to DTOs.");
+            return productDtos;
+        } catch (Exception e) {
+            log.error("Error fetching products", e);
+            throw e;
+        }
     }
+
 
     @Override
     public List<ProductDto> getAllProductsByName(String name) {

@@ -16,14 +16,12 @@ public class ProductDto {
 
     private String description;
 
-    //private byte[] byteImg;
-    private String imageUrl;  // Verifique se este campo está presente
 
+    private String imageUrl;
     private Long categoryId;
 
     private String categoryName;
 
-   // private MultipartFile img;
 
     private Long quantity;
 

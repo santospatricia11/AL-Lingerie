@@ -29,6 +29,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 public class CartController {
+
 	private final CartService cartService;
 
 	@PostMapping("/cart")
@@ -38,10 +39,10 @@ public class CartController {
 	}
 
 	@GetMapping("/cart/{userId}")
-	public ResponseEntity<?> getCartByUserId(@PathVariable Long userId) {
+	public ResponseEntity<OrderDto> getCartByUserId(@PathVariable Long userId) {
 		log.info("Received request to get cart for user with ID: {}", userId);
 		OrderDto orderDto = cartService.getCartByUserId(userId);
-		return ResponseEntity.status(HttpStatus.OK).body(orderDto);
+		return ResponseEntity.ok(orderDto);
 	}
 
 	@GetMapping("/coupon/{userId}/{code}")
@@ -75,9 +76,8 @@ public class CartController {
 	}
 
 	@GetMapping("/myOrders/{userId}")
-	public ResponseEntity<List<OrderDto>> getMyPlacedOrders(@PathVariable Long userId){
+	public ResponseEntity<List<OrderDto>> getMyPlacedOrders(@PathVariable Long userId) {
 		log.info("Received request to get placed orders for user with ID: {}", userId);
 		return ResponseEntity.ok(cartService.getMyPlacedOrders(userId));
 	}
-
 }

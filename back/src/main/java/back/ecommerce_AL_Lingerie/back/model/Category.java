@@ -21,7 +21,7 @@ public class Category {
 
     private String name;
 
-    @Lob
+
     private String description;
 
     public CategoryDto getDto(){

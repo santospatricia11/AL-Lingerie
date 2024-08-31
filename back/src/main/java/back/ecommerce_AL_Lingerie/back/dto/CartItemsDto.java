@@ -17,7 +17,7 @@ public class CartItemsDto {
     private Long productId;
     private Long orderId;
     private String productName;
-    private byte[] returnedImage;
+    private String imageUrl;
     private Long userId;
 
 

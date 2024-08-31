@@ -28,7 +28,6 @@ public class Product {
 
     private Long price;
 
-    @Lob
     @Column(columnDefinition = "TEXT")
     private String description;
 
@@ -41,6 +40,9 @@ public class Product {
     private Category category;
 
     public ProductDto getDto() {
+        if (this.category == null) {
+            throw new IllegalStateException("Category cannot be null");
+        }
         return ProductDto.builder()
                 .id(this.id)
                 .name(this.name)
@@ -51,4 +53,5 @@ public class Product {
                 .categoryName(this.category.getName())
                 .build();
     }
+
 }

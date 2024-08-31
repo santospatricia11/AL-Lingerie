@@ -21,8 +21,8 @@ public class Review {
     private Long id;
 
     private Long rating;
+    private String imageUrl;
 
-    @Lob
     private String description;
 
   /*  @Lob
@@ -43,7 +43,7 @@ public class Review {
                 .id(this.id)
                 .rating(this.rating)
                 .description(this.description)
-                //.returnedImg(this.img)
+                .imageUrl(this.imageUrl)
                 .productId(this.product.getId())
                 .userId(this.user.getId())
                 .username(this.user.getName())
