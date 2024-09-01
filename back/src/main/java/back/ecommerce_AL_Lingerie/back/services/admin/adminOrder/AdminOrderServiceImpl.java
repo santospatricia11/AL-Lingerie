@@ -24,6 +24,9 @@ public class AdminOrderServiceImpl implements AdminOrderService {
     @Autowired
     private final OrderRepository orderRepository;
 
+    public Order getActiveOrder(Long userId) {
+        return orderRepository.findByUserIdAndOrderStatus(userId, OrderStatus.PENDING);
+    }
     public List<OrderDto> getAllPlacedOrders() {
         List<Order> orderList = orderRepository.findAllByOrderStatusIn(List.of(OrderStatus.PENDING, OrderStatus.SHIPPED, OrderStatus.DELIVERED));
         return orderList.stream().map(Order::getOrderDto).collect(Collectors.toList());
@@ -66,7 +69,7 @@ public class AdminOrderServiceImpl implements AdminOrderService {
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.YEAR, year);
-        calendar.set(Calendar.MONTH, month - 1);    // Indexing starts from 0 jan->0 to dec->11
+        calendar.set(Calendar.MONTH, month - 1);
         calendar.set(Calendar.DAY_OF_MONTH, 1);
         calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);

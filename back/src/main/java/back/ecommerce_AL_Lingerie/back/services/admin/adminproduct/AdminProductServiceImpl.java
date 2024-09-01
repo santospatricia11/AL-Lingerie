@@ -33,7 +33,7 @@ public class AdminProductServiceImpl implements AdminProductService {
                 .name(productDto.getName())
                 .price(productDto.getPrice())
                 .description(productDto.getDescription())
-                .imageUrl(productDto.getImageUrl())  // Atribuindo o campo imageUrl
+                .imageUrl(productDto.getImageUrl())
                 .category(categoryRepository.findById(productDto.getCategoryId())
                         .orElseThrow(() -> new RuntimeException("Category not found")))  // Verificando e atribuindo a categoria
                 .build();
@@ -93,7 +93,7 @@ public class AdminProductServiceImpl implements AdminProductService {
         return optionalProduct.map(Product::getDto).orElse(null);
     }
 
-    //@Override
+
     public ProductDto updateProduct(Long productId, ProductDto productDto) {
         log.info("Updating product with ID: {}", productId);
         Optional<Product> optionalProduct = productRepository.findById(productId);

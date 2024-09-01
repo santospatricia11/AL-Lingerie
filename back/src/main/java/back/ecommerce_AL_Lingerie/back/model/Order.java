@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -56,6 +57,13 @@ public class Order {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "order", cascade = CascadeType.ALL)
     private List<CartItems> cartItems;
+    public void addCartItem(CartItems cartItem) {
+        if (cartItems == null) {
+            cartItems = new ArrayList<>();
+        }
+        cartItems.add(cartItem);
+        cartItem.setOrder(this);
+    }
 
     // Método para converter a entidade Order para OrderDto
     public OrderDto getOrderDto() {

@@ -32,7 +32,7 @@ public class WebSecurityConfiguration {
 		return new MvcRequestMatcher.Builder(introspector);
 	}
 
-	@SuppressWarnings("deprecation")
+
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http, MvcRequestMatcher.Builder mvc) throws Exception {
 		log.info("Configuring security filter chain");
